@@ -1,0 +1,144 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Bola.tscn" type="PackedScene" id=2]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://linea.png" type="Texture" id=4]
+[ext_resource path="res://jugador.tscn" type="PackedScene" id=5]
+[ext_resource path="res://jugador2.tscn" type="PackedScene" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 230 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 400, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 400, 10 )
+
+[node name="Main" type="Node" index="0" groups=[
+"main",
+]]
+
+script = ExtResource( 1 )
+nuevabol = ExtResource( 2 )
+
+[node name="Control" parent="." index="0" instance=ExtResource( 3 )]
+
+[node name="linea" type="Sprite" parent="." index="1"]
+
+position = Vector2( 372.517, 204.257 )
+scale = Vector2( 0.1, 1.5 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="bola_inicio" type="Position2D" parent="." index="2" groups=[
+"inicio",
+]]
+
+position = Vector2( 372.704, 202.698 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Player" parent="." index="3" instance=ExtResource( 5 )]
+
+[node name="Jugador1_inicio" type="Position2D" parent="." index="4"]
+
+position = Vector2( 23.1247, 210.114 )
+
+[node name="Player2" parent="." index="5" instance=ExtResource( 6 )]
+
+[node name="Jugador2_inicio" type="Position2D" parent="." index="6"]
+
+position = Vector2( 708.157, 205.432 )
+
+[node name="derecha" type="Area2D" parent="." index="7"]
+
+editor/display_folded = true
+position = Vector2( 734.189, 202.092 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="derecha" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="izquierda" type="Area2D" parent="." index="8"]
+
+editor/display_folded = true
+position = Vector2( -10.7123, 231.082 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="izquierda" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="superior" type="Area2D" parent="." index="9"]
+
+editor/display_folded = true
+position = Vector2( 364.1, -9.01055 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="superior" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="Inferior" type="Area2D" parent="." index="10"]
+
+editor/display_folded = true
+position = Vector2( 374.121, 419.525 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inferior" index="0"]
+
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="derecha" to="." method="_on_derecha_body_entered"]
+
+[connection signal="body_entered" from="izquierda" to="." method="_on_izquierda_body_entered"]
+
+[connection signal="body_entered" from="superior" to="." method="_on_superior_body_entered"]
+
+[connection signal="body_entered" from="Inferior" to="." method="_on_Inferior_body_entered"]
+
+
