@@ -1,4 +1,4 @@
-Extends RigidBody2D
+extends RigidBody2D
 var tamano
 
 
